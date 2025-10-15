@@ -72,7 +72,8 @@ const OrderHistory = () => {
             >
               <div className="flex justify-between items-center">
                 <div>
-                  <p className="font-semibold">Order #{order.order_id}</p>
+                  <p className="font-semibold">Order #{order.order_id}  Ref: {order.customer_name}</p>
+                  <p className="font-semibold">Total value: {order.total}</p>
                   <p className="text-gray-500">
                     {new Date(order.order_date).toLocaleString()}
                   </p>
@@ -81,6 +82,13 @@ const OrderHistory = () => {
               </div>
             </div>
           ))}
+      <button
+        onClick={() => navigate("/")}
+        className="text-blue-600 hover:underline"
+      >
+        ← Back to Orders
+      </button>
+
         </div>
       )}
     </div>

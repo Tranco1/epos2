@@ -108,6 +108,35 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
+app.put("/api/users/:id", async (req, res) => {
+  const { id } = req.params;
+  const { email, password } = req.body;
+
+  try {
+    let query = "";
+    let values = [];
+
+    if (password && password.trim() !== "") {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      query = "UPDATE users SET email = $1, password = $2 WHERE id = $3 RETURNING id, name, email";
+      values = [email, hashedPassword, id];
+    } else {
+      query = "UPDATE users SET email = $1 WHERE id = $2 RETURNING id, name, email";
+      values = [email, id];
+    }
+
+    const result = await pool.query(query, values);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Error updating user:", err);
+    res.status(500).json({ error: "Server error updating profile" });
+  }
+});
 
 // 🟢 Get products joined with category name
 app.get("/api/products", async (req, res) => {

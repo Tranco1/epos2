@@ -58,7 +58,11 @@ const OrderDetails = () => {
               className="flex items-center bg-white p-3 rounded-xl shadow"
             >
               <img
-                src={item.img || "https://via.placeholder.com/64"}
+//                src={item.img || "https://via.placeholder.com/64"}
+                  src={item.img.startsWith("http")
+                  ? item.img
+                  : `http://192.168.1.107:5173${item.img}`
+                  }
                 alt={item.name}
                 className="w-16 h-16 object-cover rounded-lg mr-4"
               />

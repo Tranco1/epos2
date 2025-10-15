@@ -1,1 +1,26 @@
 updated epos using existing myerp DB
+
+0. mkdir epos2
+1. git clone https://github.com/Tranco1/epos2.git
+2. cd epos2
+3. sudo apt install nodejs ( if not installed )
+
+for the frontend:
+
+4. npm create vite@latest epos2 -- --template react
+5. cd epos2
+6. npm install
+7. npm install axios
+
+for the backend
+
+8. mkdir server && cd server
+9. npm init -y
+10. npm install express pg cors body-parser
+   cd epos2
+11. npm install bcrypt   ( encryption )
+12. npm install bcrypt jsonwebtoken
+13. npm install react-router-dom  (provide routing for login page )
+14. npm install lucide-react  ( This is the hamburger menu )
+
+15. Check the dependancies in the project root package.json file.
